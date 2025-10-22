@@ -12,6 +12,8 @@ const router = Router();
 
 router.post('/', createBook);
 router.get('/', getAllBooks);
+
+
 router.get('/genre/:genre_id', getBooksByGenre);
 router.get('/:book_id', getBookDetail);
 router.patch('/:book_id', updateBook);
