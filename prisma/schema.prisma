@@ -1,0 +1,74 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  username  String?
+  password  String
+  email     String   @unique
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
+  orders    Orders[]
+
+  @@map("users")
+}
+
+model Genre {
+  id         String    @id @default(cuid())
+  name       String    @unique
+  createdAt  DateTime  @default(now()) @map("created_at")
+  updatedAt  DateTime  @updatedAt @map("updated_at")
+  deleted_at DateTime?
+  books      Book[]
+
+  @@map("genres")
+}
+
+model Book {
+  id               String        @id @default(cuid())
+  title            String        @unique
+  writer           String
+  publisher        String
+  publication_year Int
+  description      String?
+  price            Decimal
+  stock_quantity   Int
+  genreId          String        @map("genre_id")
+  createdAt        DateTime      @default(now()) @map("created_at")
+  updatedAt        DateTime      @updatedAt @map("updated_at")
+  deleted_at       DateTime?
+  genre            Genre         @relation(fields: [genreId], references: [id])
+  order_items      OrderItems[]
+
+  @@map("books")
+}
+
+model OrderItems {
+  id         String   @id
+  quantity   Int
+  order_id   String
+  book_id    String
+  created_at DateTime @default(now())
+  updated_at DateTime
+  books      Book     @relation(fields: [book_id], references: [id])
+  orders     Orders   @relation(fields: [order_id], references: [id])
+
+  @@map("order_items")
+}
+
+model Orders {
+  id          String        @id
+  user_id     String
+  created_at  DateTime      @default(now())
+  updated_at  DateTime
+  order_items OrderItems[]
+  users       User          @relation(fields: [user_id], references: [id])
+
+  @@map("orders")
+}

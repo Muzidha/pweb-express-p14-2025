@@ -1,0 +1,67 @@
+{
+  "compilerOptions": {
+    /* Language and Environment */
+    "target": "ES2020",                          // Target ECMAScript version
+    "lib": ["ES2020"],                           // Library files to include
+    "experimentalDecorators": true,              // Enable decorators
+    "emitDecoratorMetadata": true,               // Emit metadata for decorators
+
+    /* Modules */
+    "module": "commonjs",                        // Module system
+    "rootDir": "./",                          // Root directory of source files
+    "moduleResolution": "node",                  // Module resolution strategy
+    "baseUrl": "./",                             // Base directory for module resolution
+    "paths": {
+      "@/*": ["src/*"],
+      "@controllers/*": ["src/controllers/*"],
+      "@services/*": ["src/services/*"],
+      "@middlewares/*": ["src/middlewares/*"],
+      "@routes/*": ["src/routes/*"],
+      "@utils/*": ["src/utils/*"],
+      "@config/*": ["src/config/*"]
+    },
+    "resolveJsonModule": true,                   // Allow importing JSON modules
+    "allowSyntheticDefaultImports": true,        // Allow default imports from modules
+
+    /* Emit */
+    "outDir": "./dist",                          // Output directory for compiled files
+    "removeComments": true,                      // Remove comments from output
+    "sourceMap": true,                           // Generate source maps
+    "declaration": true,                         // Generate .d.ts files
+    "declarationMap": true,                      // Generate source maps for .d.ts files
+
+    /* Interop Constraints */
+    "esModuleInterop": true,                     // Emit additional JS for CommonJS compatibility
+    "forceConsistentCasingInFileNames": true,    // Ensure consistent casing
+    "isolatedModules": true,                     // Ensure each file can be safely transpiled
+
+    /* Type Checking */
+    "strict": true,                              // Enable all strict type checking options
+    "noImplicitAny": true,                       // Error on expressions with implied 'any' type
+    "strictNullChecks": true,                    // Enable strict null checks
+    "strictFunctionTypes": true,                 // Enable strict checking of function types
+    "strictBindCallApply": true,                 // Enable strict bind/call/apply
+    "strictPropertyInitialization": true,        // Enable strict class property initialization
+    "noImplicitThis": true,                      // Error on 'this' with implied 'any' type
+    "alwaysStrict": true,                        // Parse in strict mode
+    "noUnusedLocals": true,                      // Error on unused local variables
+    "noUnusedParameters": true,                  // Error on unused parameters
+    "noImplicitReturns": true,                   // Error on code paths that don't return
+    "noFallthroughCasesInSwitch": true,         // Error on fallthrough in switch statements
+
+    /* Completeness */
+    "skipLibCheck": true                         // Skip type checking of declaration files
+  },
+  "include": [
+    "src/**/*"                                   // Include all TypeScript files in src
+  ],
+  "exclude": [
+    "node_modules",                              // Exclude node_modules
+    "dist",                                      // Exclude compiled output
+    "**/*.spec.ts",                              // Exclude test files
+    "**/*.test.ts"
+  ],
+  "ts-node": {
+    "require": ["tsconfig-paths/register"]       // Support for path aliases in ts-node
+  }
+}
