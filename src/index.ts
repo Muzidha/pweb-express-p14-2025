@@ -1,12 +1,12 @@
-const { Router } = require('express');
-const {
+import { Router } from 'express';
+import {
   createBook,
   getAllBooks,
   getBookDetail,
   getBooksByGenre,
   updateBook,
   deleteBook,
-} = require('../controllers/bookController');
+} from './controllers/bookController';
 
 const router = Router();
 
@@ -17,4 +17,4 @@ router.get('/:book_id', getBookDetail);
 router.patch('/:book_id', updateBook);
 router.delete('/:book_id', deleteBook);
 
-module.exports = router;
+export default router;
