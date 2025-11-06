@@ -12,11 +12,18 @@ const PORT = process.env.PORT || 3000;
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-router.post('/', createBook);
-router.get('/', getAllBooks);
-router.get('/genre/:genre_id', getBooksByGenre);
-router.get('/:book_id', getBookDetail);
-router.patch('/:book_id', updateBook);
-router.delete('/:book_id', deleteBook);
+// Routes
+app.use('/auth', authRoutes);
+app.use('/books', bookRoutes);
+app.use('/genres', genreRoutes);
+app.use('/transactions', transactionRoutes);
+
+// Error Handler
+app.use(errorHandler);
+
+// Start server
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
 
 export default app;

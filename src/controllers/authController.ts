@@ -8,11 +8,11 @@ const { successResponse, errorResponse } = require('../utils/response');
 
 export const register = async (req: Request, res: Response): Promise<void> => {
   try {
-    const { email, password, name } = req.body;
+    const { email, password, username } = req.body;
 
     // Validation
-    if (!email || !password || !name) {
-      errorResponse(res, 'Email, password, and name are required', null, 400);
+    if (!email || !password) {
+      errorResponse(res, 'Email and password are required', null, 400);
       return;
     }
 
@@ -34,12 +34,12 @@ export const register = async (req: Request, res: Response): Promise<void> => {
       data: {
         email,
         password: hashedPassword,
-        name,
+        username: username || null,
       },
       select: {
         id: true,
         email: true,
-        name: true,
+        username: true,
         createdAt: true,
       },
     });
@@ -90,7 +90,7 @@ export const login = async (req: Request, res: Response): Promise<void> => {
       user: {
         id: user.id,
         email: user.email,
-        name: user.name,
+        username: user.username,
       },
     });
   } catch (error) {
@@ -111,7 +111,7 @@ export const getMe = async (req: AuthRequest, res: Response): Promise<void> => {
       select: {
         id: true,
         email: true,
-        name: true,
+        username: true,
         createdAt: true,
         updatedAt: true,
       },
