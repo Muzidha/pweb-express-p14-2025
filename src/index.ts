@@ -1,4 +1,5 @@
 import express from 'express';
+import cors from 'cors';
 import authRoutes from './routes/authRoutes';
 import bookRoutes from './routes/bookRoutes';
 import genreRoutes from './routes/genreRoutes';
@@ -7,6 +8,14 @@ import errorHandler from './middlewares/errorHandler';
 
 const app = express();
 const PORT = process.env.PORT || 3000;
+
+// CORS Configuration
+app.use(cors({
+  origin: 'http://localhost:5173', // Frontend URL
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}));
 
 // Middleware
 app.use(express.json());

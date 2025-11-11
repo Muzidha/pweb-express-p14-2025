@@ -1,10 +1,11 @@
-import type { Request, Response } from 'express';
+import type { Request, Response, NextFunction } from 'express';
 const { Prisma } = require('@prisma/client');
 
 const errorHandler = (
   error: any,
   _req: Request,
-  res: Response
+  res: Response,
+  _next: NextFunction
 ): void => {
   console.error('Error:', error);
 
